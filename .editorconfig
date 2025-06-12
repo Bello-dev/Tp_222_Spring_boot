@@ -1,0 +1,102 @@
+# ===============================================
+# 🎯 TP222 Allergies Spring Boot - Editor Config
+# ===============================================
+# Configuration universelle pour tous les éditeurs
+# Assure la cohérence du style de code
+# ===============================================
+
+# Racine du projet
+root = true
+
+# ===== CONFIGURATION GLOBALE =====
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# ===== JAVA & SPRING BOOT =====
+[*.java]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+continuation_indent_size = 8
+
+# ===== CONFIGURATION & PROPRIÉTÉS =====
+[*.{properties,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.xml]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+# ===== SCRIPTS =====
+[*.{sh,bash}]
+indent_style = space
+indent_size = 2
+
+[*.{bat,cmd,ps1}]
+end_of_line = crlf
+indent_style = space
+indent_size = 2
+
+# ===== WEB & FRONTEND =====
+[*.{html,css,scss,js,ts,jsx,tsx}]
+indent_style = space
+indent_size = 2
+
+# ===== DOCUMENTATION =====
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = 80
+
+[*.{txt,rst,adoc}]
+max_line_length = 80
+
+# ===== DOCKER =====
+[Dockerfile*]
+indent_style = space
+indent_size = 2
+
+[docker-compose*.yml]
+indent_style = space
+indent_size = 2
+
+# ===== MAVEN =====
+[pom.xml]
+indent_style = space
+indent_size = 2
+
+# ===== SQL =====
+[*.sql]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+# ===== FICHIERS SPÉCIAUX =====
+[*.{gitignore,gitattributes,env}]
+indent_style = space
+indent_size = 2
+
+# Makefiles nécessitent des tabs
+[{Makefile,makefile,*.mk}]
+indent_style = tab
+indent_size = 4
+
+# ===============================================
+# 🎉 Configuration Editor Complète
+# ===============================================
+# Support pour:
+# ✅ IntelliJ IDEA / VS Code / Eclipse
+# ✅ Vim / Emacs / Sublime Text
+# ✅ Cohérence entre développeurs
+# ✅ Standards Java/Spring Boot
+# ✅ Configuration Docker/Maven
+# ===============================================

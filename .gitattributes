@@ -1,0 +1,133 @@
+# ===============================================
+# 🎯 TP222 Allergies Spring Boot - Git Attributes
+# ===============================================
+# Configuration des attributs Git pour une gestion
+# optimale des fichiers selon leur type
+# ===============================================
+
+# ===== NORMALISATION DES FINS DE LIGNE =====
+# Forcer LF pour tous les fichiers texte
+* text=auto eol=lf
+
+# ===== FICHIERS JAVA & SPRING BOOT =====
+*.java text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+
+# Maven
+pom.xml text eol=lf
+*.pom text eol=lf
+
+# ===== SCRIPTS & CONFIGURATION =====
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Docker
+Dockerfile* text eol=lf
+docker-compose*.yml text eol=lf
+.dockerignore text eol=lf
+
+# ===== DOCUMENTATION =====
+*.md text eol=lf
+*.txt text eol=lf
+*.rst text eol=lf
+*.adoc text eol=lf
+
+# ===== WEB & FRONTEND =====
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+
+# ===== DONNÉES & CONFIG =====
+*.sql text eol=lf
+*.csv text eol=lf
+*.env text eol=lf
+
+# ===== FICHIERS BINAIRES =====
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text eol=lf
+
+# Archives
+*.jar binary
+*.war binary
+*.ear binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.rar binary
+
+# Documents
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
+*.ppt binary
+*.pptx binary
+
+# Certificats et clés
+*.p12 binary
+*.jks binary
+*.keystore binary
+*.truststore binary
+*.pem text eol=lf
+*.crt text eol=lf
+*.key text eol=lf
+
+# ===== ATTRIBUTS SPÉCIAUX =====
+# Fichiers qui ne doivent pas être modifiés
+*.jar -text -diff
+*.war -text -diff
+*.ear -text -diff
+
+# Fichiers sensibles (pas de diff dans les logs)
+*secret* diff=secret
+*password* diff=secret
+*key* diff=secret
+*.env diff=secret
+
+# ===== LINGUIST (pour GitHub) =====
+# Marquer comme documentation
+*.md linguist-documentation
+docs/* linguist-documentation
+*.txt linguist-documentation
+
+# Marquer comme généré
+target/* linguist-generated=true
+*.jar linguist-generated=true
+*.class linguist-generated=true
+
+# Forcer la détection du langage principal
+src/main/java/* linguist-language=Java
+src/test/java/* linguist-language=Java
+*.yml linguist-language=YAML
+
+# ===== FILTRES PERSONNALISÉS =====
+# Configuration des filtres Git pour la sécurité
+# (Filtres avancés peuvent être configurés séparément)
+
+# ===============================================
+# 🎉 Configuration Git Attributes Complète
+# ===============================================
+# Ce fichier assure:
+# ✅ Fins de ligne cohérentes (LF sur Unix/Mac)
+# ✅ Gestion optimale des fichiers binaires
+# ✅ Protection des fichiers sensibles
+# ✅ Détection correcte des langages GitHub
+# ✅ Attributs spécifiques Spring Boot/Java
+# ===============================================
