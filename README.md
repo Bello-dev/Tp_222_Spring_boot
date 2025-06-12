@@ -514,7 +514,7 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ---
 
-**🎯 Migration Flask → Spring Boot réussie avec conservation de 100% des fonctionnalités IA !**
+**🎯 Bell Aqil alias Bello-dev → Spring Boot réussie avec conservation de 100% des fonctionnalités IA !**
 
 ---
 
