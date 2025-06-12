@@ -58,28 +58,28 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tp222_allergies
       SPRING_DATASOURCE_USERNAME: tp222_user
       SPRING_DATASOURCE_PASSWORD: tp222_password
-      
+
       # Configuration JPA/Hibernate
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
-      
+
       # Configuration serveur
       SERVER_PORT: 8080
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,metrics,prometheus
-      
+
       # Configuration logs
       LOGGING_LEVEL_COM_TP222_ALLERGIES: DEBUG
       LOGGING_LEVEL_ROOT: INFO
-      
+
       # Configuration Swagger
       SPRINGDOC_API_DOCS_PATH: /api-docs
       SPRINGDOC_SWAGGER_UI_PATH: /swagger-ui.html
-      
+
       # Options JVM pour conteneur
       JAVA_OPTS: >-
-        -Xmx512m 
-        -Xms256m 
+        -Xmx512m
+        -Xms256m
         -Dspring.profiles.active=docker
         -Djava.security.egd=file:/dev/./urandom
     ports:
@@ -92,7 +92,7 @@ services:
     volumes:
       - app_logs:/app/logs
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/actuator/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3

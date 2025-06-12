@@ -2,7 +2,7 @@
 # Équivalent du Dockerfile Flask mais pour Java/Spring Boot
 
 # Étape 1: Build de l'application avec Maven
-FROM maven:3.9.4-openjdk-21-slim AS build
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
@@ -14,12 +14,15 @@ COPY src src
 RUN mvn clean package -DskipTests
 
 # Étape 2: Image de production légère
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jre-alpine
 
 # Métadonnées
 LABEL maintainer="TP222 Allergies Team"
 LABEL description="Spring Boot Allergies Management System with AI Detection"
 LABEL version="1.0.0"
+
+# Installer curl pour le health check
+RUN apk add --no-cache curl
 
 # Variables d'environnement
 ENV SPRING_PROFILES_ACTIVE=docker
