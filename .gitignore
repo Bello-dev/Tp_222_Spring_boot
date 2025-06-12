@@ -1,0 +1,293 @@
+# ===============================================
+# 🎯 TP222 Allergies Spring Boot - GitIgnore
+# ===============================================
+# Configuration complète pour projet Spring Boot
+# avec Maven, Docker, PostgreSQL et IntelliJ IDEA
+# ===============================================
+
+# ===== JAVA & SPRING BOOT =====
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+
+# Gradle (au cas où)
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ===== SPRING BOOT SPECIFIQUE =====
+# Logs Spring Boot
+logs/
+*.log
+*.log.*
+spring.log*
+
+# Spring Boot DevTools
+.reloadtrigger
+
+# Spring Boot application.properties avec secrets
+application-secrets.properties
+application-local.properties
+application-production.properties
+
+# ===== IDEs & EDITEURS =====
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ===== BASES DE DONNÉES =====
+# H2 Database
+*.h2.db
+*.h2.lock.db
+*.h2.trace.db
+
+# PostgreSQL dumps
+*.sql
+*.dump
+*.backup
+
+# Base de données locale de test
+/data/
+/db-data/
+
+# ===== DOCKER =====
+# Docker volumes et données
+docker-data/
+postgres-data/
+.docker/
+
+# Docker Compose override
+docker-compose.override.yml
+docker-compose.local.yml
+docker-compose.prod.yml
+
+# ===== SYSTÈME D'EXPLOITATION =====
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===== ENVIRONNEMENT & CONFIGURATION =====
+# Variables d'environnement
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Configuration locale
+config/local/
+config/secrets/
+
+# Certificats SSL
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+*.keystore
+*.truststore
+
+# ===== DOCUMENTATION & RAPPORTS =====
+# Rapports de couverture
+/coverage/
+/test-results/
+/jacoco-report/
+
+# Documentation générée
+/docs/build/
+/javadoc/
+
+# ===== FICHIERS TEMPORAIRES =====
+# Fichiers temporaires
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
+
+# Cache
+.cache/
+.npm/
+.yarn/
+
+# ===== TESTS =====
+# TestContainers
+.testcontainers/
+
+# Test output
+/test-output/
+/allure-results/
+/surefire-reports/
+
+# ===== MONITORING & LOGS =====
+# Actuator endpoints exports
+/actuator-exports/
+
+# Application logs
+application.log*
+app.log*
+error.log*
+debug.log*
+
+# ===== MÉDIAS & UPLOADS =====
+# Uploads utilisateur
+/uploads/
+/media/
+/static-files/
+
+# Images temporaires
+*.jpg.tmp
+*.png.tmp
+*.gif.tmp
+
+# ===== SÉCURITÉ =====
+# Clés API et secrets
+api-keys.txt
+secrets.yml
+.secrets/
+
+# Tokens
+.token
+*.token
+
+# ===== PERFORMANCE =====
+# Profiling
+*.hprof
+*.jfr
+
+# ===== SAUVEGARDE =====
+# Fichiers de sauvegarde
+*.backup
+*.bak
+*.orig
+
+# ===== SPÉCIFIQUE AU PROJET TP222 =====
+# Données de test générées
+/test-data/
+/sample-data/
+
+# Rapports d'allergies générés
+/reports/allergy-reports/
+/exports/
+
+# Configuration spécifique environnement
+application-dev.yml
+application-staging.yml
+
+# ===== PACKAGING =====
+# JAR avec versions
+*-SNAPSHOT.jar
+allergies-management-*.jar.original
+
+# Distribution
+/dist/
+/release/
+
+# ===== INTÉGRATION CONTINUE =====
+# CI/CD artifacts
+.circleci/
+.github/workflows/deployment-secrets.yml
+
+# ===== NOTES PERSONNELLES =====
+# Fichiers de notes développeur
+TODO.md
+NOTES.md
+DEV-NOTES.txt
+*.notes
+
+# ===============================================
+# 🎉 Configuration GitIgnore Complète
+# ===============================================
+# Ce fichier couvre:
+# ✅ Java & Spring Boot
+# ✅ Maven & Gradle  
+# ✅ IDEs (IntelliJ, VS Code, Eclipse)
+# ✅ Docker & Bases de données
+# ✅ Systèmes d'exploitation
+# ✅ Sécurité & environnement
+# ✅ Tests & monitoring
+# ✅ Spécificités TP222 Allergies
+# ===============================================
