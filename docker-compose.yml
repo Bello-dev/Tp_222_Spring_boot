@@ -1,0 +1,159 @@
+# Docker Compose pour Spring Boot Allergies Management System
+# Équivalent du docker-compose.yml Flask avec PostgreSQL et pgAdmin
+
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: tp222-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tp222_allergies
+      POSTGRES_USER: tp222_user
+      POSTGRES_PASSWORD: tp222_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - tp222-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tp222_user -d tp222_allergies"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Interface d'administration PostgreSQL
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: tp222-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@tp222.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - tp222-network
+
+  # Application Spring Boot
+  allergies-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tp222-allergies-springboot
+    restart: unless-stopped
+    environment:
+      # Configuration de base de données
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tp222_allergies
+      SPRING_DATASOURCE_USERNAME: tp222_user
+      SPRING_DATASOURCE_PASSWORD: tp222_password
+      
+      # Configuration JPA/Hibernate
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      
+      # Configuration serveur
+      SERVER_PORT: 8080
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,metrics,prometheus
+      
+      # Configuration logs
+      LOGGING_LEVEL_COM_TP222_ALLERGIES: DEBUG
+      LOGGING_LEVEL_ROOT: INFO
+      
+      # Configuration Swagger
+      SPRINGDOC_API_DOCS_PATH: /api-docs
+      SPRINGDOC_SWAGGER_UI_PATH: /swagger-ui.html
+      
+      # Options JVM pour conteneur
+      JAVA_OPTS: >-
+        -Xmx512m 
+        -Xms256m 
+        -Dspring.profiles.active=docker
+        -Djava.security.egd=file:/dev/./urandom
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - tp222-network
+    volumes:
+      - app_logs:/app/logs
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Monitoring avec Prometheus (optionnel)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: tp222-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - tp222-network
+    profiles:
+      - monitoring
+
+  # Dashboard Grafana (optionnel)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: tp222-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+    networks:
+      - tp222-network
+    profiles:
+      - monitoring
+
+# Réseaux
+networks:
+  tp222-network:
+    driver: bridge
+
+# Volumes persistants
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  app_logs:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
